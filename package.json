@@ -1,0 +1,14 @@
+﻿{
+  "name": "tripura-cloud-bot",
+  "version": "1.0.0",
+  "main": "whatsapp_backend_worker.js",
+  "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
+    "puppeteer": "^22.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "axios": "^1.6.0"
+  },
+  "scripts": {
+    "start": "node whatsapp_backend_worker.js"
+  }
+}
