@@ -1,16 +1,14 @@
 {
-  "name": "tripura-cloud-bot",
-  "version": "1.0.0",
+  "name": "tripura-cloud-bot-baileys",
+  "version": "2.0.0",
   "main": "whatsapp_backend_worker.js",
   "dependencies": {
-    "whatsapp-web.js": "^1.23.0",
-    "puppeteer": "^22.0.0",
+    "@whiskeysockets/baileys": "^6.7.5",
     "qrcode-terminal": "^0.12.0",
     "axios": "^1.6.0",
     "csv-parser": "^3.2.1",
     "express": "^4.21.2",
-    "qr-image": "^3.2.0",
-    "qrcode": "^1.5.4"
+    "pino": "^8.19.0"
   },
   "scripts": {
     "start": "node whatsapp_backend_worker.js"
