@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "tripura-cloud-bot",
   "version": "1.0.0",
   "main": "whatsapp_backend_worker.js",

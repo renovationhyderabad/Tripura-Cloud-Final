@@ -1,4 +1,4 @@
-﻿FROM ghcr.io/puppeteer/puppeteer:latest
+FROM ghcr.io/puppeteer/puppeteer:latest
 USER root
 WORKDIR /app
 COPY package*.json ./
