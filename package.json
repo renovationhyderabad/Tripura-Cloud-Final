@@ -11,6 +11,6 @@
     "pino": "^8.19.0"
   },
   "scripts": {
-    "start": "node whatsapp_cloud_final.js",
+    "start": "node whatsapp_cloud_final.js"
   }
 }
