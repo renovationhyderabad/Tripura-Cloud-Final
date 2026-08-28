@@ -62,7 +62,7 @@ app.get(['/', '/qr'], (req, res) => {
 </head>
 <body>
  <div class="card">
-  <h1>ðŸ‘‘ Miss. Tripura Sundari AI</h1>
+  <h1>👑 Miss. Tripura Sundari AI</h1>
   <p>Scan with WhatsApp Linked Devices to Activate Your 24/7 Senior Designer</p>
   <img src="/whatsapp_qr.png?t=${Date.now()}" alt="Scan QR Code" />
   <div class="status"><span class="pulse"></span> Waiting for QR Scan...</div>
@@ -112,14 +112,14 @@ app.get('/events', (req, res) => {
  });
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
  console.log('Web Dashboard running on http://localhost:3000');
 });
 
 // ============================================================================
 // 3. STORAGE & ATOMIC DB HELPERS
 // ============================================================================
-const BRAIN_DIR = 'C:/Users/Admin/.gemini/antigravity/brain/63c95c38-6477-4a12-9673-edf6539d09d5';
+const BRAIN_DIR = './data';
 if (!fs.existsSync(BRAIN_DIR)) fs.mkdirSync(BRAIN_DIR, { recursive: true });
 
 const HISTORY_FILE = path.join(BRAIN_DIR, 'chat_history.json');
@@ -237,7 +237,7 @@ async function callLlama(messages, max_tokens = 250, temp = 0.6) {
     });
    });
    req.on('error', () => resolve(null));
-   req.setTimeout(25000, () => { req.destroy(); resolve(null); });
+   req.setTimeout(3000, () => { req.destroy(); resolve(null); });
    req.write(payload);
    req.end();
   } catch(e) {
@@ -249,7 +249,7 @@ async function callLlama(messages, max_tokens = 250, temp = 0.6) {
 async function extractState(phone, userText) {
  try {
   const timeStr = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata' });
-  const prompt = `Extract data from user message. Current India time: ${timeStr}. Output ONLY a raw JSON object â€” no explanation, no markdown, no extra text. JSON format (use null/false if not found): {"name":null,"email":null,"location":null,"requirements":null,"floor_plan_shared":false,"reminder_minutes_from_now":null,"reminder_reason":null}`;
+  const prompt = `Extract data from user message. Current India time: ${timeStr}. Output ONLY a raw JSON object — no explanation, no markdown, no extra text. JSON format (use null/false if not found): {"name":null,"email":null,"location":null,"requirements":null,"floor_plan_shared":false,"reminder_minutes_from_now":null,"reminder_reason":null}`;
   let res = await callLlama([
    { role: "system", content: prompt },
    { role: "user", content: `Message: "${userText}"\nJSON:` }
@@ -278,11 +278,11 @@ async function sendExecutiveDailyReport(targetPhone) {
     let flaggedChats = Object.keys(disabledDb).filter(p => disabledDb[p] === true).length;
     let hotLeadsCount = Object.keys(profileDb).length;
 
-    const reportMsg = `I've been keeping an eye on your customer messages today! ðŸ‘‘\n\n` +
+    const reportMsg = `I've been keeping an eye on your customer messages today! 👑\n\n` +
       `I've flagged ${flaggedChats > 0 ? flaggedChats : 3} AI chats that need attention for you. These are specific conversations where I've stepped back so you can provide your personal touch.\n\n` +
       `I replied in ${totalAiChats} AI chats for you today. There are also ${hotLeadsCount > 0 ? hotLeadsCount : 3} hot leads logged for your review.\n\n` +
-      `I'm here whenever you're ready to dive back in! âœ¨\n\n` +
-      `ðŸ‘‰ *Review chats & leads:* https://renovationhyderabad.com/digital_marketing_hub.html`;
+      `I'm here whenever you're ready to dive back in! ✨\n\n` +
+      `👉 *Review chats & leads:* https://renovationhyderabad.com/digital_marketing_hub.html`;
 
     await client.sendMessage(targetPhone, reportMsg);
     console.log(`[EXECUTIVE REPORT SENT] Successfully delivered Meta-style daily update to ${targetPhone}`);
@@ -315,22 +315,22 @@ async function generateReply(phone) {
 
 MASTER 15-HABIT WHATSAPP SALES PROTOCOL:
 
-[01 â€” START STRONG]
+[01 — START STRONG]
 1. REPLY LIKE A HUMAN: Speak with natural warmth, polite enthusiasm, and genuine empathy. Never sound like a robotic bot or automated script.
 2. SAVE LEAD NAME & SOURCE: Note the homeowner's name, property location, and project type.
 3. UNDERSTAND THE REAL NEED: Clarify whether they need a Complete Villa Overhaul, German Modular Kitchen, Spa Bathroom, Structural Wall Removal, or 3-Stage Waterproofing.
 4. CONFIRM TIMING FIRST: Be respectful of their time and check if now is a good moment to discuss their property.
 5. AVOID PUSHING TOO EARLY: Practice consultative discovery first. Build trust and understand requirements before pitching appointments.
 
-[02 â€” KEEP THE CHAT MOVING]
+[02 — KEEP THE CHAT MOVING]
 6. FOLLOW UP WITH CONTEXT: Always reference the specific room, layout detail, or floor plan they previously mentioned.
 7. ASK ONE CLEAR NEXT-STEP QUESTION: Every single reply MUST end with exactly ONE clear, low-friction next-step question (e.g. "Do you have a 2D floor plan handy?" or "Would Saturday morning work for an engineer site visit?").
 8. USE QUICK REPLIES WISELY: Provide immediate, precise answers on technical specifications (IS:710 Marine BWP Plywood, 2mm PUR edge-banding, Blum motion hardware, Grohe concealed diverters).
 9. SEND ONE IDEA PER MESSAGE: Keep replies concise (1 to 3 short sentences max) so they are effortless to read on mobile.
 10. USE WARMTH & PROFESSIONAL POLISH: Maintain a sophisticated, reassuring, and helpful tone as Miss Tripura Sundari.
 
-[03 â€” BUILD TRUST & CONVERT]
-11. SHARE PRICING AFTER CONTEXT: Never throw arbitrary rates. Explain indicative investment ranges (â‚¹1,450 to â‚¹2,500/sq.ft) only after understanding property size and specifications. Reference: https://renovationhyderabad.com/renovation-cost-hyderabad.html
+[03 — BUILD TRUST & CONVERT]
+11. SHARE PRICING AFTER CONTEXT: Never throw arbitrary rates. Explain indicative investment ranges (₹1,450 to ₹2,500/sq.ft) only after understanding property size and specifications. Reference: https://renovationhyderabad.com/renovation-cost-hyderabad.html
 12. USE CATALOG & SERVICE LINKS: Provide clean, direct website links for deep browsing (https://renovationhyderabad.com/services.html or https://renovationhyderabad.com/gallery.html).
 13. CONFIRM BOOKINGS CLEARLY: When a site assessment or consultation is requested, confirm the date, time, and civil engineer details clearly.
 14. SEND A SHORT SUMMARY: Periodically recap agreed discussion points and milestones so the client feels organized.
@@ -352,9 +352,9 @@ STRICT OPERATIONAL RULES:
    reply = reply.replace(/^Assistant\s*:/i, '').trim();
    if (!reply) reply = null;
   }
-  return reply || "Hey! ðŸ˜Š We'd love to help with your renovation. Could you tell me a bit about what you have in mind regarding your property and requirements?";
+  return reply || "Hey! 😊 We'd love to help with your renovation. Could you tell me a bit about what you have in mind regarding your property and requirements?";
  } catch (e) {
-  return "Hey! ðŸ˜Š We'd love to help with your renovation. Could you share your property location and scope of work so I can guide you right away?";
+  return "Hey! 😊 We'd love to help with your renovation. Could you share your property location and scope of work so I can guide you right away?";
  }
 }
 
@@ -390,7 +390,7 @@ client.on('qr', (qr) => {
 });
 
 client.on('loading_screen', (percent, message) => {
- console.log(`[LOADING] ${percent}% â€” ${message}`);
+ console.log(`[LOADING] ${percent}% — ${message}`);
 });
 
 client.on('authenticated', () => {
@@ -427,7 +427,7 @@ client.on('message', async msg => {
       if (!line.trim() || line.includes('Date')) continue;
       const phone = line.split(',')[1];
       if (phone) {
-       const reviewMsg = `Hi there! This is Tripura from Renovation Hyderabad. ðŸŒŸ\n\nWe hope you had a great experience connecting with us. As a local business, your feedback means the world to us! If you have a minute, could you leave us a quick 5-star review on Google? It helps us immensely.\n\nHere is the link: https://g.page/r/renovationhyd`;
+       const reviewMsg = `Hi there! This is Tripura from Renovation Hyderabad. 🌟\n\nWe hope you had a great experience connecting with us. As a local business, your feedback means the world to us! If you have a minute, could you leave us a quick 5-star review on Google? It helps us immensely.\n\nHere is the link: https://g.page/r/renovationhyd`;
        client.sendMessage(phone.includes('@c.us') ? phone : phone + '@c.us', reviewMsg).catch(() => {});
        count++;
       }
@@ -453,16 +453,16 @@ client.on('message', async msg => {
      let profileDb = JSON.parse(fs.readFileSync(PROFILES_FILE, 'utf8'));
      hotLeads = Object.keys(profileDb).length;
     }
-    if (fs.existsSync('f:/Agent - RenovationHyd/blog.html')) {
-     const blogContent = fs.readFileSync('f:/Agent - RenovationHyd/blog.html', 'utf8');
+    if (false) {
+     const blogContent = '';
      blogsPublished = (blogContent.match(/<article/g) || []).length;
     }
-    const reportMsg = `ðŸ“Š *Renovation Hyderabad - Organic Performance Report*\n\n` +
+    const reportMsg = `📊 *Renovation Hyderabad - Organic Performance Report*\n\n` +
      `Here is how your automated digital marketing engine is performing:\n\n` +
-     `ðŸ’¬ *Total AI Conversations*: ${totalChats}\n` +
-     `ðŸ”¥ *Hot Leads Captured*: ${hotLeads}\n` +
-     `ðŸ“ *SEO Blogs Published*: ${blogsPublished}\n\n` +
-     `_Your system is running smoothly! Keep up the great work!_ ðŸš€`;
+     `💬 *Total AI Conversations*: ${totalChats}\n` +
+     `🔥 *Hot Leads Captured*: ${hotLeads}\n` +
+     `📝 *SEO Blogs Published*: ${blogsPublished}\n\n` +
+     `_Your system is running smoothly! Keep up the great work!_ 🚀`;
     client.sendMessage(msg.from, reportMsg).catch(() => {});
     return;
    }
@@ -488,7 +488,7 @@ client.on('message', async msg => {
    disabledDb[msg.from] = true;
    saveDB(DISABLED_CHATS_FILE, disabledDb);
    console.log(`[AI PAUSED] AI turned OFF for chat ${msg.from}`);
-   await client.sendMessage(msg.from, "â¸ï¸ AI Concierge (Miss Tripura Sundari) has been paused for this conversation. Our senior consultant will take over directly.").catch(() => {});
+   await client.sendMessage(msg.from, "⏸️ AI Concierge (Miss Tripura Sundari) has been paused for this conversation. Our senior consultant will take over directly.").catch(() => {});
    return;
   }
 
@@ -499,7 +499,7 @@ client.on('message', async msg => {
    
    addHistory(msg.from, 'user', text);
    let aiReply = await generateReply(msg.from);
-   await client.sendMessage(msg.from, `â–¶ï¸ Miss Tripura Sundari AI activated! ðŸ˜Š\n\n` + aiReply).catch(() => {});
+   await client.sendMessage(msg.from, `▶️ Miss Tripura Sundari AI activated! 😊\n\n` + aiReply).catch(() => {});
    addHistory(msg.from, 'bot', aiReply);
    return;
   }
@@ -512,13 +512,13 @@ client.on('message', async msg => {
 
   const automatedPhrases = ['thank you for contacting', 'our team will assist', 'you have reached', 'this is an automated'];
   if (automatedPhrases.some(p => lowerText.includes(p))) {
-   console.log('[SKIP] Automated message detected â€” not replying.');
+   console.log('[SKIP] Automated message detected — not replying.');
    return;
   }
 
   if (lowerText === 'stop' || lowerText === 'unsubscribe') {
    broadcast({ type: 'ai_receive', phone: msg.from, text: `[STOP] ${text}` });
-   client.sendMessage(msg.from, "No problem! We will not message you again. Have a great day! ðŸ™").catch(() => {});
+   client.sendMessage(msg.from, "No problem! We will not message you again. Have a great day! 🙏").catch(() => {});
    return;
   }
 
@@ -593,7 +593,7 @@ let currentIndex = 0;
 let campaignData = [];
 const CSV_FILE_PATH = path.join(__dirname, 'immediate_leads.csv');
 const VIDEO_PATH = path.join(__dirname, 'Renovation_Video.mp4');
-const B2C_MESSAGE = `Hi! ðŸŒŸ Hope you're doing well.\n\nSharing a quick look at one of our recent turnkey renovations by *Renovation Hyderabad *.\n\nWe specialize in bespoke interiors with 100% factory-made BWP Marine Plywood, German hardware, and guaranteed 45-day delivery.\n\nWould you like to schedule a free design consultation or check out our sample portfolio? Let us know! ðŸ˜Š`;
+const B2C_MESSAGE = `Hi! 🌟 Hope you're doing well.\n\nSharing a quick look at one of our recent turnkey renovations by *Renovation Hyderabad *.\n\nWe specialize in bespoke interiors with 100% factory-made BWP Marine Plywood, German hardware, and guaranteed 45-day delivery.\n\nWould you like to schedule a free design consultation or check out our sample portfolio? Let us know! 😊`;
 let messagesSentInBatch = 0;
 
 function loadState() {
@@ -615,7 +615,7 @@ function loadCSVAndStartCampaign() {
  try {
   loadState();
   if (!fs.existsSync(CSV_FILE_PATH)) {
-   console.log('No immediate_leads.csv found â€” skipping bulk campaign.');
+   console.log('No immediate_leads.csv found — skipping bulk campaign.');
    return;
   }
   fs.createReadStream(CSV_FILE_PATH)
