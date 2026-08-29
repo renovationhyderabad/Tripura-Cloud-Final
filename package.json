@@ -1,16 +1,20 @@
 {
-  "name": "tripura-cloud-bot-baileys",
-  "version": "2.0.0",
-  "main": "whatsapp_backend_worker.js",
-  "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.5",
-    "qrcode-terminal": "^0.12.0",
-    "axios": "^1.6.0",
-    "csv-parser": "^3.2.1",
-    "express": "^4.21.2",
-    "pino": "^8.19.0"
-  },
+  "name": "tripurapcbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node whatsapp_cloud_final.js"
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc14",
+    "axios": "^1.20.0",
+    "express": "^5.2.1",
+    "qrcode": "^1.5.4"
   }
 }
