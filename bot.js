@@ -44,7 +44,7 @@ async function start() {
   const sock = makeWASocket({
     version,
     auth: state,
-    printQRInTerminal: false,
+    printQRInTerminal: true,
     browser: ['RenovationHyd PC', 'Chrome', '120.0.0'],
     getMessage: async () => ({ conversation: '' })
   });
