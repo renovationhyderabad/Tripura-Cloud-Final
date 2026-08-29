@@ -1,4 +1,5 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion } = require('@whiskeysockets/baileys');
+const qrcodeTerminal = require('qrcode-terminal');
 const QRCode = require('qrcode');
 const axios = require('axios');
 const fs = require('fs');
@@ -44,7 +45,6 @@ async function start() {
   const sock = makeWASocket({
     version,
     auth: state,
-    printQRInTerminal: true,
     browser: ['RenovationHyd PC', 'Chrome', '120.0.0'],
     getMessage: async () => ({ conversation: '' })
   });
@@ -53,9 +53,8 @@ async function start() {
 
   sock.ev.on('connection.update', async ({ connection, lastDisconnect, qr }) => {
     if (qr) {
-        console.log('Generating QR...');
-        await QRCode.toFile('./qr.png', qr, { width: 400, margin: 2 });
-        console.log('QR_READY_FOR_ARTIFACT');
+        console.log('Generating QR in terminal...');
+        qrcodeTerminal.generate(qr, { small: true });
     }
     if (connection === 'close') {
         const code = lastDisconnect?.error?.output?.statusCode;
